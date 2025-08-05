@@ -10,6 +10,7 @@
     }
   ],
   "compilerOptions": {
+    // "allowImportingTsExtensions": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
