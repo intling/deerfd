@@ -8,5 +8,15 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    //确保在不同操作系统下的一致性并启用严格的类型检查
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "composite": true
+  }
 }

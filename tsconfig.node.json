@@ -9,12 +9,17 @@
     "eslint.config.*"
   ],
   "compilerOptions": {
+    //不生成输出文件
     "noEmit": true,
+    //启用复合模式
     "composite": true,
+    //指定tsBuildInfoFile的路径
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-
+    //指定模块系统为ESNext
     "module": "ESNext",
+    //指定模块解析策略为Bundler
     "moduleResolution": "Bundler",
-    "types": ["node"],
+    //指定类型定义文件为node
+    "types": ["node"]
   }
 }
