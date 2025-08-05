@@ -75,12 +75,6 @@ api.interceptors.response.use(
       //如果有响应体但HTTP状态码不是200
       const { status } = error.response;
 
-      //特殊处理401响应
-      // if(status === 401){
-      //     clearToken()//清除Token相关信息
-      //     window.location.href = '/login'
-      // }
-
       // 尝试解析响应体
       if (error.response.data) {
         const { code, message } = error.response.data;
@@ -109,6 +103,8 @@ interface loginRequest {
   captcha?: string; //验证码可选
 }
 export interface loginResponse {
+  code: string;
+  message: string | null;
   token: string; //登录成功后返回的token
 }
 export const login = async (params: loginRequest): Promise<loginResponse> => {

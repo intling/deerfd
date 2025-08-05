@@ -10,14 +10,27 @@ const tokenStore = TokenStore();
 
 //登录接口
 const logIn = async () => {
+  if (!validatePassword(password.value)) {
+    alert("密码必须包含字母和数字，且长度在8到16个字符之间");
+    return;
+  }
   try {
     const response = await login({ username: username.value, password: password.value });
     console.log(response);
-    tokenStore.setToken(response.token);
-    router.push("/home");
+    //登录逻辑
+    if (response.code === "200") {
+      tokenStore.setToken(response.token);
+      router.push("/home");
+    } else {
+      alert("登录失败，请检查用户名和密码");
+    }
   } catch (error) {
     console.error("登录失败:", error);
   }
+};
+const validatePassword = (password: string): boolean => {
+  const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
+  return regex.test(password);
 };
 </script>
 <template>
@@ -29,11 +42,11 @@ const logIn = async () => {
         <div class="form-wrapper">
           <div class="form-group">
             <label for="username">用户名</label>
-            <input type="text" name="username" v-model="username" placeholder="" />
+            <input type="text" name="username" v-model="username" placeholder="" required />
           </div>
           <div class="form-group">
             <label for="password">密码</label>
-            <input type="password" name="password" v-model="password" placeholder="" />
+            <input type="password" name="password" v-model="password" placeholder="" required />
           </div>
           <a href="#"> 忘记密码?</a>
           <router-link to="/register" class="zhuce">注册</router-link>
